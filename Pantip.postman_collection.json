@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "4a9b2368-0207-4aa9-8b5a-642c36d90a25",
+		"name": "Pantip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef47e47c-16a5-456b-8a7e-8fa125ed52d0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"GET /posts should return expected data\", function () {",
+							"    var posts = pm.response.json();",
+							"    pm.expect(posts[0].content).to.eql(\"ที่ดิน ทรัพย์อันติดกับที่ดิน หรือประกอบเป็นอันเดียวกับที่ดิน รวมทั้งสิทธิทั้งหลายอันเกี่ยวกับกรรมสิทธิ์ที่ดินด้วย\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET one post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/post/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"post",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST create post ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50144768-6961-4399-84a0-0c55f71e6dbb",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Create Post should return post correctly\", function () {",
+							"    var post = pm.response.json();",
+							"    pm.expect(post.content).to.eql(\"WOWWWW\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\": \"WOWWWW\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
